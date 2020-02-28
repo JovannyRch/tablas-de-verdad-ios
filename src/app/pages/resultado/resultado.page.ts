@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-/* import { Storage } from "@ionic/storage"; */
+import { Storage } from "@ionic/storage";
 import { ToastController, Platform, NavController } from "@ionic/angular";
 
 @Component({
@@ -11,7 +11,7 @@ import { ToastController, Platform, NavController } from "@ionic/angular";
 export class ResultadoPage implements OnInit {
   constructor(
     private activeRoute: ActivatedRoute,
-    /* private storage: Storage, */
+    private storage: Storage,
     public toastController: ToastController,
 
     private navCtrl: NavController /* 
@@ -29,13 +29,13 @@ export class ResultadoPage implements OnInit {
     this.verExp(this.infija);
     this.toPostfix();
 
-    /*  this.storage.get("expresiones").then(val => {
+    this.storage.get("expresiones").then(val => {
       if (val) {
         this.expresionesGuardadas = val;
       } else {
         this.storage.set("expresiones", this.expresionesGuardadas);
       }
-    }); */
+    });
   }
 
   activarGuardarEnNube() {
@@ -148,7 +148,7 @@ export class ResultadoPage implements OnInit {
         this.presentToast("Ya ha sido guardado previamente");
       } else {
         this.expresionesGuardadas.push(this.infijaOrg);
-        /* this.storage.set("expresiones", this.expresionesGuardadas); */
+        this.storage.set("expresiones", this.expresionesGuardadas);
         this.presentToast("Guardado exitosamente :)");
       }
     }

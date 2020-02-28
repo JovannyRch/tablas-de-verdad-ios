@@ -72,3 +72,8 @@ table th {
   border: 1px solid rgb(226, 220, 205);
   background-color: rgb(253, 246, 228);
 }
+
+ion-app {
+  margin-top: env(safe-area-inset-top);
+  margin-bottom: env(safe-area-inset-bottom);
+}

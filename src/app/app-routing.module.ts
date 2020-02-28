@@ -28,6 +28,10 @@ const routes: Routes = [
     path: "temas",
     loadChildren: () =>
       import("./pages/temas/temas.module").then(m => m.TemasPageModule)
+  },
+  {
+    path: 'memoria',
+    loadChildren: () => import('./pages/memoria/memoria.module').then( m => m.MemoriaPageModule)
   }
 ];
 
