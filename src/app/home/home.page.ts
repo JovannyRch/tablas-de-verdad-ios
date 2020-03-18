@@ -6,7 +6,12 @@ import {
   ViewChild
 } from "@angular/core";
 
-import { ToastController, Platform, NavController } from "@ionic/angular";
+import {
+  ToastController,
+  Platform,
+  NavController,
+  AlertController
+} from "@ionic/angular";
 
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
@@ -24,7 +29,8 @@ export class HomePage implements OnInit, AfterViewInit {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     public navCtrl: NavController,
-    private router: Router
+    private router: Router,
+    private alertController: AlertController
   ) {
     platform.ready().then(() => {
       //statusBar.styleDefault();
@@ -242,6 +248,31 @@ export class HomePage implements OnInit, AfterViewInit {
 
   validar() {
     if (this.infija === "") return false;
+    if (
+      this.getCantidad("(", this.infija) != this.getCantidad(")", this.infija)
+    ) {
+      this.presentAlert("Verifica tus paréntesis");
+      return false;
+    }
     return true;
+  }
+
+  getCantidad(letra, palabra) {
+    let contador = 0;
+    for (const l of palabra) {
+      if (l == letra) contador++;
+    }
+    return contador;
+  }
+
+  async presentAlert(m: string) {
+    const alert = await this.alertController.create({
+      header: "Aviso",
+      subHeader: "",
+      message: m,
+      buttons: ["OK"]
+    });
+
+    await alert.present();
   }
 }
